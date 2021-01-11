@@ -1,0 +1,92 @@
+In Java script the data types can be divided into 3 types:
+
+1) Primitve Data Types : NUmber ,String ,boolean
+2)Composite Data Types : Arrays ,Objects
+3)Trivial Data Types : NULL ,Undefined
+
+Copy By Value :
+
+To explain copy by value let us take a small example :
+
+var a = 10;			Address of a in memory be #1000  and it will have value 10
+var b = 20;			Address of b in memory be #2000 and it will have value 20
+var c ;				Address of c in memory be #3000 this is undefined
+var d ;				Address of d in memory be #4000 this is undefined
+
+c = a ;
+
+By this statement the value of 'a'' residing in the address #1000 
+will be assigned to 'c'.
+
+So now in #1000 the value of 'a' will be 10
+also in #3000 the value of 'c' will be 10
+
+Both the variables will have their own values in their respective memory addresses.
+
+Now ,say c = c + 5;
+
+Now the #3000 memory location will have 15
+#1000 memory location will have 10
+
+Even if we chnage value of 'c' value of 'a' will not change.
+This is nothing but copy by value.
+
+To summarize copy by value means only the value of the varaibles on the right hand side of the equation 
+will be passed to the variable on the right hand side of the equation.Both the varibales will point to a 
+different memory location.
+
+Copy By Reference:
+COpy by reference comes into picture in the case of compoiste data types like arrays and objects.
+
+
+Let us define an array to understand :
+
+let a =[1,2,3,4];
+let b =[];
+
+let all the elements in a array be in the following memory locations:
+
+#1001 # 1003 #1005 #1007
+1	2	3`    4
+
+
+Now let us write as below :
+b =a;
+
+Now both and 'b' and 'a' will point to the same memory location.
+
+console.log(a);  => [1,2,3,4]
+console.log(b);	 => [1,2,3,4]
+
+Now let us make following changes:
+
+a[0] = 10;
+
+console.log(a);		=>[10,2,3,4]
+console.log(b);		=>[10,2,3,4]
+
+By changing the value of an element in array 'a' the value changes in 'b' too
+
+
+b[2]= 20;
+
+console.log(a);		=>[10,2,20,4]
+console.log(b);		=>[10,2,20,4]
+
+By changing the value of an element in array 'b' the value chnages in 'a' too
+
+This happens because the composite data types are copied by address and not value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

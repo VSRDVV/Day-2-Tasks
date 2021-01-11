@@ -1,0 +1,211 @@
+Generally composite data types are copied by reference.But there are few methods to
+copy composite data types through copy by value too.
+
+Let us understand these methods:
+
+Let us define an array 'tempID' which has temporary numbers for newly joined candidates in an office.
+The clerk in the office who knew javascript was using his code to work on this array.
+
+let tempID = [1000,1001,1002,1003,1004];
+
+Suddenly while working he realizes he needs an other set of data of the same temporay ID numbers to
+perform an other task without distrubing the original ID's list.
+
+let newtempID = [];
+tempID = newtempID:
+newtempID[0] =2000;
+
+console.log(tempID); =>[2000,1001,1002,1003,1004];
+console.log(newtempID); =>[2000,1001,1002,1003,1004];
+
+but as we know this wouldnt work as this is copy by reference as changes made in newtempID arereflected in
+tempID too.So erases all this code.
+
+To avoid this problem the clerk asks the help of his Computer Faculty on how to copy them by value.
+The computer faculty explains the below methods:
+
+1) Using SPREAD OPERATOR:
+
+let tempID=[1000,1001,1002,1003,1004];
+
+   let newtempID =[...tempID];
+
+Spread Operator copies all the values of elements from tempID to the new array newtempID.
+Both the arrays will have different address this is nothign but a shallow copy of copy by value of arrays.
+
+console.log(tempID) => [1000,1001,1002,1003,1004];
+console.log(newtempID) =>[1000,1001,1002,1003,1004];
+
+Now , to test 
+
+changes are made in newtempID array as below:
+newtempID[0] = 2000;
+newtempID[2] = 4000;
+
+
+console.log(tempID) = > [1000,1001,1002,1003,1004];
+console.log(newtempID) = > [2000,1001,4000,1003,1004];
+
+2) USING SLICE METHOD:
+
+let tempID=[1000,1001,1002,1003,1004];
+let newtempID =[];
+
+newtempID = tempID.slice(0);
+
+console.log(tempID) => [1000,1001,1002,1003,1004];
+console.log(newtempID) =>[1000,1001,1002,1003,1004];
+
+changes are made in newtempID array as below:
+newtempID[0] = 2000;
+newtempID[2] = 4000;
+
+
+console.log(tempID) = > [1000,1001,1002,1003,1004];
+console.log(newtempID) = > [2000,1001,4000,1003,1004];
+
+In a situation when there is an object/array inside an array we need to do DEEP COPYING
+the above two methods will not be enough.We will be using the third method.
+
+3) Similary shallow copying can be done by using assign ,from 
+
+ASSIGN method:
+
+let a =[['Hello'],2,3];
+let b = [];
+b = Object.assign(b,a);
+console.log(a);
+console.log(b);
+
+b[0].push('SHALLOW COPY');
+console.log(a,b);
+
+Output : SHALLOW COPYING Using Assign Method
+
+[ [ 'Hello' ], 2, 3 ]
+[ [ 'Hello' ], 2, 3 ]
+[ [ 'Hello', 'TESTING' ], 2, 3 ] [ [ 'Hello', 'TESTING' ], 2, 3 ]
+
+let a =[['Hello'],2,3];
+let b = [];
+b = Array.from(a);
+console.log(a);
+console.log(b);
+
+b[0].push('SHALLOW COPY');
+console.log(a,b);
+
+Output : SHALLOW COPYING USING FROM Method
+
+[ [ 'Hello' ], 2, 3 ]
+[ [ 'Hello' ], 2, 3 ]
+[ [ 'Hello', 'TESTING' ], 2, 3 ] [ [ 'Hello', 'TESTING' ], 2, 3 ]
+
+
+Shallow copy works fine only for objects or arrays with primitve values.
+
+3) JSON
+
+let deepArray = [['My demo']];
+let shallowArray = deepArray.slice(0);
+
+shallowArray[0].push('is great');
+console.log(deepArray[0],shallowArray[0]); => ['My demo','is great']['My demo','is great']
+
+Both deep array and shallow array will have same values.Slice will not be able to 
+copy by value so here we need to write code as below:
+
+let deepCopy = JSON.parse(JSON.stringify(deepArray));
+
+JSON.stringify method converts entire array including the internal array into a string.
+JSON.parse later converts back into Java script array or object.
+
+deepCopy[0].push('is great');
+
+console.log(deepArray[0]); => ['My demo'] 
+console.log(deepCopy[0]); => ['My demo','is great']
+
+Lets see the below code to uderstand difference between shallow and deep copy :
+
+let a =[['Hello'],2,3];
+let b = [];
+b = a.slice(0);
+console.log(a);
+console.log(b);
+
+Output :
+[ [ 'Hello' ], 2, 3 ]
+[ [ 'Hello' ], 2, 3 ]
+
+//Now we are adding one more element array 'b' to internal array 
+
+b[0].push('world');
+console.log(a);
+console.log(b);
+
+Output:SHALLOW COPY DONE
+
+[ [ 'Hello', 'world' ], 2, 3 ]
+[ [ 'Hello', 'world' ], 2, 3 ]
+
+let c = JSON.parse(JSON.stringify(b));
+b[0].push('USING JSONS');
+console.log(c);
+console.log(b);
+
+Output : DEEP COPYING IS DONE
+
+[ [ 'Hello', 'world' ], 2, 3 ]
+[ [ 'Hello', 'world' ], 2, 3 ] [ [ 'Hello', 'world', 'JSON' ], 2, 3 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
